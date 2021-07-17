@@ -1,11 +1,16 @@
 import lark
 
-def conv_to_HTML(p) -> str:
+def conv_to_HTML(p):
 	if type(p) == lark.Tree:
-		if p.data == 'tag':
+		if p.data == 'start':
+			ret = ''
+			for child in p.children:
+				ret += conv_to_HTML(child)
+			return ret
+		elif p.data == 'tag':
 			t = p.children[0]
 			children = p.children[1:]
-			if type(children[0]) == lark.Tree and children[0].data == 'attr':
+			if len(children) > 0 and type(children[0]) == lark.Tree and children[0].data == 'attr':
 				ret = f'<{t}{conv_to_HTML(children[0])}>'
 				children = children[1:]
 			else:
@@ -30,7 +35,7 @@ def conv_to_HTML(p) -> str:
 			
 def make_website(code, create_file=True):
 	grammar = '''
-		?start : tag?
+		?start : tag*
 	
 		tag : NAME attr? "{" value* "}"
 		eval : "%" "{" /.+?(?=})/? "}"
