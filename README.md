@@ -45,3 +45,7 @@ Which can be expanded to entire HTML documents:
 >    </body>
 ></html>
 >```
+## Usage
+```py
+make_website(marker_code[, create_file=True]) # Set create_file to False if you just want to return the HTML string.
+```
