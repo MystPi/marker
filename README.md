@@ -26,6 +26,7 @@ Which can be expanded to entire HTML documents:
 >        h1 (id: "header") {
 >            "Example page!"
 >        }
+>        br
 >        p {
 >            "1 + 2 = "
 >            % {1 + 2} # The '%' tag evaluates python code using the 'eval' function and must be a single line.
@@ -41,6 +42,7 @@ Which can be expanded to entire HTML documents:
 >    </head>
 >    <body>
 >        <h1 id="header">Example page!</h1>
+>        <br>
 >        <p>1 + 2 = 3</p>
 >    </body>
 ></html>
