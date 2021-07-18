@@ -36,22 +36,22 @@ def conv_to_HTML(p) -> str:
 
 def make_website(code, create_file=True):
     grammar = '''
-            ?start : tag*
+        ?start : tag*
 
-            tag : NAME attr? ("{" value* "}")?
-            eval : "%" "{" /.+?(?=})/? "}"
-            attr : "(" key_value ("," key_value)* ")"
-            key_value : NAME ":" STRING
+        tag : NAME attr? ("{" value* "}")?
+        eval : "%" "{" /.+?(?=})/? "}"
+        attr : "(" key_value ("," key_value)* ")"
+        key_value : NAME ":" STRING
 
-            ?value : tag
-                   | eval
-                   | STRING
+        ?value : tag
+               | eval
+               | STRING
 
-            %import common.CNAME -> NAME
-            %import common.ESCAPED_STRING -> STRING
-            %import common.WS
-            %ignore WS
-            %ignore /\#.*/
+        %import common.CNAME -> NAME
+        %import common.ESCAPED_STRING -> STRING
+        %import common.WS
+        %ignore WS
+        %ignore /\#.*/
     '''
 
     parser = lark.Lark(grammar)
