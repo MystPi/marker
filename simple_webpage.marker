@@ -1,0 +1,16 @@
+html {
+    head {
+        title {"Simple webpage with styling"}
+        style {"
+            body {
+                text-align: center;
+                font-family: sans-serif;
+            }
+            h1 {
+                color: red;
+            }
+        "}
+    }
+    h1 {"Hello, world!"}
+    %{"<br>".join(list(map(str, range(1, 11))))}
+}
