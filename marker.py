@@ -35,20 +35,24 @@ def conv_to_HTML(p) -> str:
             return p.value[1:-1]
 
 def make_website(code, create_file=True):
-    grammar = '''
+    grammar = r'''
         ?start : tag*
 
         tag : NAME attr? ("{" value* "}")?
         eval : "%" "{" /.+?(?=})/? "}"
         attr : "(" key_value ("," key_value)* ")"
         key_value : NAME ":" STRING
-
+        
         ?value : tag
                | eval
                | STRING
+          
+        _STRING_INNER: /[\S\s]*?/
+        _STRING_ESC_INNER: _STRING_INNER /(?<!\\)(\\\\)*?/
 
+        STRING : "\"" _STRING_ESC_INNER "\""
+        
         %import common.CNAME -> NAME
-        %import common.ESCAPED_STRING -> STRING
         %import common.WS
         %ignore WS
         %ignore /\#.*/
