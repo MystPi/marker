@@ -47,6 +47,7 @@ Which can be expanded to entire HTML documents:
 >    </body>
 ></html>
 >```
+> (Note that the resulting HTML isn't really formatted.)
 ## Usage
 ```py
 from marker import make_website
