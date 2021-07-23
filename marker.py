@@ -49,7 +49,6 @@ def make_website(code, create_file=True):
           
         _STRING_INNER: /[\S\s]*?/
         _STRING_ESC_INNER: _STRING_INNER /(?<!\\)(\\\\)*?/
-
         STRING : "\"" _STRING_ESC_INNER "\""
         
         %import common.CNAME -> NAME
