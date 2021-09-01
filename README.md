@@ -29,7 +29,7 @@ Which can be expanded to entire HTML documents:
 >        br
 >        p {
 >            "1 + 2 = "
->            % {1 + 2} # The '%' tag evaluates python code using the 'eval' function and must be a single line.
+>            % {1 + 2} # The '%' tag evaluates python code using the 'eval' function and can't contain any newlines.
 >        }
 >    }
 >}
