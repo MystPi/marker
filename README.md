@@ -3,9 +3,9 @@ Marker is a language that transpiles directly to HTML.
 
 ## Example
 ```py
-from marker import make_website
+from marker import generate
 
-print(make_website('p (style: "color: red") {"Hello, world!"}', False))
+print(generate('p (style: "color: red") {"Hello, world!"}'))
 
 # Output:
 # <p style="color: red">Hello, world!</p>
@@ -49,8 +49,14 @@ Which can be expanded to entire HTML documents:
 >```
 > (Note that the resulting HTML isn't really formatted.)
 ## Usage
+### In a Python script
 ```py
-from marker import make_website
+from marker import generate
 
-make_website(marker_code[, create_file=True]) # Set create_file to False if you just want to return the HTML string.
+html = generate(marker_code)
 ```
+### From the command line
+```bash
+python3 marker.py [marker code file] [optional output file]
+```
+If `[optional output file]` is omitted, the result will be printed to the terminal.

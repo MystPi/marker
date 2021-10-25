@@ -1,4 +1,4 @@
-import lark
+import lark, sys
 
 def conv_to_HTML(p) -> str:
     if type(p) == lark.Tree:
@@ -34,7 +34,7 @@ def conv_to_HTML(p) -> str:
         if p.type == 'STRING':
             return p.value[1:-1]
 
-def make_website(code, create_file=True):
+def generate(code, create_file=True):
     grammar = r'''
         ?start : tag*
 
@@ -60,15 +60,18 @@ def make_website(code, create_file=True):
     parser = lark.Lark(grammar)
     parsed = parser.parse(code)
 
-    if create_file:
-        name = input('Name of HTML file (no .html extension) (enter nothing to quit): ')
-        if not name:
-            return
-        name += '.html'
-        with open(name, 'w') as file:
-            if input(f'Are you sure you want to overwrite \'{name}\'? (y/n) ').lower() == 'n':
-                return
-            file.write(conv_to_HTML(parsed))
-            print(f'Success! Open \'{name}\' in a web browser to see the website!')
+    return conv_to_HTML(parsed)
+
+if __name__ == '__main__':
+    arg_length = len(sys.argv)
+    contents = ''
+    if arg_length > 1:
+        with open(sys.argv[1]) as file:
+            contents = file.read()
+    if arg_length == 2:
+        print(generate(contents))
+    elif arg_length == 3:
+        with open(sys.argv[2], 'w') as output:
+            output.write(generate(contents))
     else:
-        return conv_to_HTML(parsed)
+        print('Arguments:\n[file]\t\t\t\tThe file to be read\n[output file] (optional)\tIf included, the resulting HTML will be written to the specified file')
