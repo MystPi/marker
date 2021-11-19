@@ -1,5 +1,6 @@
 import lark, sys
 
+
 def conv_to_HTML(p) -> str:
     if type(p) == lark.Tree:
         if p.data == 'start':
@@ -34,6 +35,7 @@ def conv_to_HTML(p) -> str:
         if p.type == 'STRING':
             return p.value[1:-1]
 
+
 def generate(code, create_file=True):
     grammar = r'''
         ?start : tag*
@@ -61,6 +63,7 @@ def generate(code, create_file=True):
     parsed = parser.parse(code)
 
     return conv_to_HTML(parsed)
+
 
 if __name__ == '__main__':
     arg_length = len(sys.argv)
